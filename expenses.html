@@ -10,27 +10,34 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="expenses.html">Expenses</a></li>
-                <li><a href="report.html">Reports</a></li>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="expenses.html">Expenses</a>
+                </li>
+                <li>
+                    <a href="report.html">Reports</a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
-
-        
         <section>
-            <h2 class="dropdown-header">Income ▼</h2>
+            <h2 class="dropdown-header">Income</h2>
             <div class="dropdown-content">
                 <form id="income-form">
                     <label for="income-type">Select Income Source:</label>
                     <select id="income-type">
                         <option value="salary">Salary</option>
+
                         <option value="freelance">Freelance Work</option>
+
                         <option value="investments">Investments</option>
+
                         <option value="business">Business Income</option>
-                        <option value="others">Others</option>
+
                     </select>
                     <input type="number" placeholder="Amount" min="0" step="1" required>
                     <button type="submit">Add Income</button>
@@ -39,16 +46,21 @@
         </section>
 
         <section>
-            <h2 class="dropdown-header">Home/Utilities ▼</h2>
+            <h2 class="dropdown-header">Home/Utilities</h2>
             <div class="dropdown-content">
                 <form id="utilities-form">
                     <label for="utility-type">Select Expense:</label>
                     <select id="utility-type">
                         <option value="rent">Rent/Mortgage</option>
+
                         <option value="electricity">Electricity</option>
+
                         <option value="water">Water</option>
+
                         <option value="internet">Internet</option>
+
                         <option value="gas">Gas</option>
+
                     </select>
                     <input type="number" placeholder="Amount" min="0" step="1" required>
                     <button type="submit">Add Expense</button>
@@ -58,16 +70,19 @@
 
        
         <section>
-            <h2 class="dropdown-header">Entertainment ▼</h2>
+            <h2 class="dropdown-header">Entertainment</h2>
             <div class="dropdown-content">
                 <form id="entertainment-form">
                     <label for="entertainment-type">Select Expense:</label>
                     <select id="entertainment-type">
                         <option value="movies">Movies</option>
+
                         <option value="gaming">Gaming</option>
+
                         <option value="vacation">Vacations</option>
+
                         <option value="subscriptions">Streaming Subscriptions</option>
-                        <option value="others">Others</option>
+
                     </select>
                     <input type="number" placeholder="Amount" min="0" step="1" required>
                     <button type="submit">Add Expense</button>
@@ -81,10 +96,13 @@
                     <label for="medical-type">Select Expense:</label>
                     <select id="medical-type">
                         <option value="health-insurance">Health Insurance</option>
+
                         <option value="doctor-visits">Doctor Visits</option>
+
                         <option value="medications">Medications</option>
-                        <option value="gym">Gym Membership</option>
-                        <option value="others">Others</option>
+
+                        <option value="gym">Gym Memberships</option>
+                    
                     </select>
                     <input type="number" placeholder="Amount" min="0" step="1" required>
                     <button type="submit">Add Expense</button>
