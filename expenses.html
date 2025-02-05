@@ -110,18 +110,21 @@
             </div>
         </section>
         <section>
-            <h2 class="dropdown-header">Children ▼</h2>
+            <h2 class="dropdown-header">Children</h2>
             <div class="dropdown-content">
                 <form id="children-form">
                     <label for="children-type">Select Expense:</label>
                     <select id="children-type">
                         <option value="school">School Fees</option>
+
                         <option value="toys">Toys</option>
+
                         <option value="clothing">Clothing</option>
+
                         <option value="activities">Extracurricular Activities</option>
-                        <option value="others">Others</option>
+                        
                     </select>
-                    <input type="number" placeholder="Amount" min="0" step="1" required>
+                    <input type="number" placeholder="Amount" min="0" step="1">
                     <button type="submit">Add Expense</button>
                 </form>
             </div>
@@ -129,15 +132,19 @@
 
         
         <section>
-            <h2 class="dropdown-header">Others ▼</h2>
+            <h2 class="dropdown-header">Others</h2>
             <div class="dropdown-content">
                 <form id="others-form">
                     <label for="other-type">Select Expense:</label>
                     <select id="other-type">
                         <option value="charity">Charity</option>
+
                         <option value="transportation">Transportation</option>
+
                         <option value="gifts">Gifts</option>
+
                         <option value="miscellaneous">Miscellaneous</option>
+                        
                     </select>
                     <input type="number" placeholder="Amount" min="0" step="1" required>
                     <button type="submit">Add Expense</button>
