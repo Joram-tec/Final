@@ -93,6 +93,20 @@ main {
     margin: 0;
     font-weight: 500;
 }
-
+.see{
+    font: bolder;
+    font-size: x-large;
+    font-style: italic;
+    
+}
+.btn-primary {
+    background-color: #4CAF50; 
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
 

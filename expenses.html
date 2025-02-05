@@ -11,10 +11,10 @@
         <nav>
             <ul>
                 <li>
-                    <a href="home.html">Home</a>
+                    <a href="index.html">Home</a>
                 </li>
                 <li>
-                    <a href="expense.html">Expenses</a>
+                    <a href="expenses.html">Expenses</a>
                 </li>
                 <li>
                     <a href="report.html">Reports</a>
@@ -22,7 +22,71 @@
             </ul>
         </nav>
     </header>
-    <script src="./js/expense.js" defer></script>
+    <main>
+        <div class="container">
+            <section class="form-section">
+                <h2>Add New Record</h2>
+                <form id="expense-form">
+                    <div class="input-group">
+                        <label for="record-name">Record Name:</label>
+                        <input type="text" id="record-name" name="record-name" placeholder="Enter name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="type">Type:</label>
+                        <select id="type" name="type">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="food">Food</option>
+                            <option value="transport">Transport</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="salary">Salary</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Add Record</button>
+                </form>
+            </section>
+
+            <section class="overview">
+                <h2>Summary Overview</h2>
+                <div class="overview-box">
+                    <h3>Total Expenses</h3>
+                    <p id="total-expenses">$0.00</p>
+                </div>
+                <div class="overview-box">
+                    <h3>Total Income</h3>
+                    <p id="total-income">$0.00</p>
+                </div>
+                <div class="overview-box">
+                    <h3>Net Balance</h3>
+                    <p id="net-balance">$0.00</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+    
+    
+    <footer>
+        <p>&copy; 2025 Smart Budget Planner. All rights reserved.</p>
+    </footer>
+    <script src="./js/expenses.js" defer></script>
 </body>
 </html>
 
