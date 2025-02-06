@@ -32,15 +32,10 @@
                     <form id="income-form">
                         <label for="income-type">Select Income Source:</label>
                         <select id="income-type">
-
                             <option value="salary">Salary</option>
-    
                             <option value="freelance">Freelance Work</option>
-    
                             <option value="investments">Investments</option>
-    
                             <option value="business">Business Income</option>
-    
                         </select>
                         <input type="number" placeholder="Amount" min="0" step="1" required>
                         <button type="submit">Add Income</button>
@@ -48,101 +43,95 @@
                 </div>
             </section>
         </section>
+
         <section>
             <h1>Expenses</h1>
-
-          
             <form id="utilities-form">
                 <label for="utility-type">Select Expense:</label>
                 <select id="utility-type" name="utility-type">
-
                     <option value="rent">Rent/Mortgage</option>
-
                     <option value="electricity">Electricity</option>
-
                     <option value="water">Water</option>
-
                     <option value="internet">Internet</option>
-
                     <option value="gas">Gas</option>
-
                 </select>
                 <input type="number" name="utility-amount" placeholder="Amount" min="0" step="1" required>
                 <button type="submit">Add Utility Expense</button>
             </form>
 
-            
+            <section>
+                <div class="dropdown-content">
+                    <form id="food-form">
+                        <label for="food-type">Select Expense:</label>
+                        <select id="food-type">
+                            <option value="groceries">Groceries</option>
+                            <option value="eating-out">Eating out</option>
+                        </select>
+                        <input type="number" placeholder="Amount" min="0" step="1" required>
+                        <button type="submit">Add Food Expense</button>
+                    </form>
+                </div>
+            </section>
+
             <form id="entertainment-form">
                 <label for="entertainment-type">Select Expense:</label>
                 <select id="entertainment-type" name="entertainment-type">
-
                     <option value="movies">Movies</option>
-
                     <option value="gaming">Gaming</option>
-
                     <option value="vacation">Vacations</option>
-
                     <option value="subscriptions">Streaming Subscriptions</option>
-
                 </select>
                 <input type="number" name="entertainment-amount" placeholder="Amount" min="0" step="1" required>
                 <button type="submit">Add Entertainment Expense</button>
             </form>
 
-            
             <form id="medical-form">
                 <label for="medical-type">Select Expense:</label>
                 <select id="medical-type" name="medical-type">
-
                     <option value="health-insurance">Health Insurance</option>
-
                     <option value="doctor-visits">Doctor Visits</option>
-
                     <option value="medications">Medications</option>
-
                     <option value="gym">Gym Memberships</option>
-
                 </select>
                 <input type="number" name="medical-amount" placeholder="Amount" min="0" step="1" required>
                 <button type="submit">Add Medical Expense</button>
             </form>
 
-           
             <form id="family-form">
                 <label for="family-type">Select Expense:</label>
                 <select id="family-type" name="family-type">
-
                     <option value="school-fees">School Fees</option>
-
                     <option value="toys">Toys</option>
-
                     <option value="clothing">Clothing</option>
-
                     <option value="extracurricular">Extracurricular Activities</option>
-
                 </select>
                 <input type="number" name="family-amount" placeholder="Amount" min="0" step="1" required>
                 <button type="submit">Add Family Expense</button>
             </form>
 
-            
+            <form id="debt-form">
+                <label for="debt-type">Select Expense:</label>
+                <select id="debt-type" name="debt-type">
+                    <option value="loans">Loans</option>
+                    <option value="credit-cards">Credit Cards</option>
+                </select>
+                <input type="number" name="debt-amount" placeholder="Amount" min="0" step="1" required>
+                <button type="submit">Add Debt Expense</button>
+            </form>
+
             <form id="other-expenses-form">
                 <label for="other-type">Select Expense:</label>
                 <select id="other-type" name="other-type">
-
                     <option value="charity">Charity</option>
-
                     <option value="transportation">Transportation</option>
-
-                    <option value="gifts">Loans</option>
-
+                    <option value="gifts">Gifts</option>
                     <option value="miscellaneous">Miscellaneous</option>
-
                 </select>
                 <input type="number" name="other-amount" placeholder="Amount" min="0" step="1" required>
                 <button type="submit">Add Other Expense</button>
             </form>
         </section>
+
         <section>
             <section id="summary" class="summary">
                 <h2>Summary</h2>
@@ -159,10 +148,15 @@
                     <span id="remaining-budget">$0.00</span>
                 </div>
             </section>
-            
         </section>
+
         <section>
             <button id="reset-button" class="reset-button">Reset All Data</button> 
+        </section>
+
+        <section id="expenses-section">
+            <h2>All Expenses</h2>
+            <ul id="expense-list"></ul>
         </section>
     </main>
 

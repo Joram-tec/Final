@@ -1,36 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const expenseCategories = [
-        'utilities', 'entertainment', 'medical', 'family', 'others'
-    ];
+let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+let income = parseFloat(localStorage.getItem('income')) || 0;
 
-    let totalIncome = 0;
-    let totalExpenses = 0;
-    let expenseDetails = [];
 
-    expenseCategories.forEach(category => {
-        const expensesData = JSON.parse(localStorage.getItem(category)) || [];
-        expensesData.forEach(expense => {
-            totalExpenses += expense.amount;
-            expenseDetails.push(`${expense.type}: $${expense.amount.toFixed(2)}`);
-        });
-    });
+const totalIncomeElement = document.getElementById('total-income');
+const totalExpensesElement = document.getElementById('total-expenses');
+const remainingBudgetElement = document.getElementById('remaining-budget');
+const expenseDetailsList = document.getElementById('expense-details');
 
-    const incomeData = JSON.parse(localStorage.getItem('income')) || [];
-    incomeData.forEach(item => totalIncome += item.incomeAmount);
+function calculateTotalExpenses() {
+    return expenses.reduce((total, expense) => total + expense.amount, 0);
+}
 
-    const remainingBudget = totalIncome - totalExpenses;
-
-    
-    document.getElementById('total-income').textContent = `$${totalIncome.toFixed(2)}`;
-    document.getElementById('total-expenses').textContent = `$${totalExpenses.toFixed(2)}`;
-    document.getElementById('remaining-budget').textContent = `$${remainingBudget.toFixed(2)}`;
-
-    
-    const expenseDetailsList = document.getElementById('expense-details');
-    expenseDetails.forEach(detail => {
+function displayExpenseDetails() {
+    expenses.forEach(expense => {
         const listItem = document.createElement('li');
-        listItem.textContent = detail;
+        listItem.textContent = `${expense.category}: $${expense.amount.toFixed(2)}`;
         expenseDetailsList.appendChild(listItem);
     });
-});
+}
+
+
+function updateReport() {
+    const totalExpenses = calculateTotalExpenses();
+    const surplusDeficit = income - totalExpenses;
+
+    totalIncomeElement.textContent = `$${income.toFixed(2)}`;
+    totalExpensesElement.textContent = `$${totalExpenses.toFixed(2)}`;
+    remainingBudgetElement.textContent = `$${surplusDeficit.toFixed(2)}`;
+}
+
+
+updateReport();
+displayExpenseDetails();
+
+function calculateTotalExpenses() {
+    return expenses.reduce((total, expense) => total + expense.amount, 0);
+}
+
+
+function displayExpenseDetails() {
+    
+
+    expenses.forEach(expense => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${expense.category}: $${expense.amount.toFixed(2)}`;
+        expenseDetailsList.appendChild(listItem);
+    });
+}
+
+function updateReport() {
+    const totalExpenses = calculateTotalExpenses();
+    const surplusDeficit = income - totalExpenses;
+
+    totalIncomeElement.textContent = `$${income.toFixed(2)}`;
+    totalExpensesElement.textContent = `$${totalExpenses.toFixed(2)}`;
+    remainingBudgetElement.textContent = `$${surplusDeficit.toFixed(2)}`;
+}
+
+
+updateReport();
+displayExpenseDetails();
 

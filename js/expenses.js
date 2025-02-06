@@ -1,166 +1,91 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const formHandlers = [
-        { formId: 'utilities-form', storageKey: 'utilities' },
 
-        { formId: 'entertainment-form', storageKey: 'entertainment' },
+let expenses = [];
+let income = 0;
 
-        { formId: 'medical-form', storageKey: 'medical' },
 
-        { formId: 'family-form', storageKey: 'family' },
-        
-        { formId: 'other-expenses-form', storageKey: 'others' }
-    ];
+const incomeForm = document.getElementById('income-form');
+const incomeInput = incomeForm.querySelector('input');
+const incomeSelect = incomeForm.querySelector('select');
 
-    formHandlers.forEach(({ formId, storageKey }) => {
-        const form = document.getElementById(formId);
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const type = form.querySelector('select').value;
-            const amount = parseFloat(form.querySelector('input').value);
+const expenseForms = document.querySelectorAll('form');
+const expenseList = document.getElementById('expense-list');
+const totalIncomeElement = document.getElementById('total-income');
+const totalExpensesElement = document.getElementById('total-expenses');
+const remainingBudgetElement = document.getElementById('remaining-budget');
+const resetButton = document.getElementById('reset-button');
 
-            if (!amount || isNaN(amount)) {
-                alert("Please enter a valid amount");
-                return;
-            }
 
-            const expensesData = JSON.parse(localStorage.getItem(storageKey)) || [];
-            expensesData.push({ type, amount });
-            localStorage.setItem(storageKey, JSON.stringify(expensesData));
+function updateSummary() {
+    const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+    const surplusDeficit = income - totalExpenses;
 
-            alert(`${storageKey.charAt(0).toUpperCase() + storageKey.slice(1)} expense added successfully!`);
-            form.reset();
+    totalExpensesElement.textContent = `$${totalExpenses.toFixed(2)}`;
+    remainingBudgetElement.textContent = `$${surplusDeficit.toFixed(2)}`;
+}
+
+function displayExpenses() {
+    expenseList.innerHTML = ''; 
+    expenses.forEach((expense, index) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <strong>${expense.category}</strong>: $${expense.amount.toFixed(2)} 
+            <button class="remove-expense" data-index="${index}">Remove</button>
+        `;
+        expenseList.appendChild(listItem);
+    });
+
+
+    const removeButtons = document.querySelectorAll('.remove-expense');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            expenses.splice(index, 1); 
+            displayExpenses(); 
+            updateSummary(); 
         });
     });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    
-    const formHandlers = [
-        { formId: 'utilities-form', storageKey: 'utilities' },
-        { formId: 'entertainment-form', storageKey: 'entertainment' },
-        { formId: 'medical-form', storageKey: 'medical' },
-        { formId: 'family-form', storageKey: 'family' },
-        { formId: 'other-expenses-form', storageKey: 'others' }
-    ];
- 
-    const incomeForm = document.getElementById('income-form');
-    if (incomeForm) {
-        incomeForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const incomeType = document.getElementById('income-type').value;
-            const incomeAmount = parseFloat(incomeForm.querySelector('input').value);
+}
 
-            if (!incomeAmount || isNaN(incomeAmount)) {
-                alert("Please enter a valid income amount.");
-                return;
-            }
 
-            const incomeData = JSON.parse(localStorage.getItem('income')) || [];
-            incomeData.push({ incomeType, incomeAmount });
-            localStorage.setItem('income', JSON.stringify(incomeData));
-
-            alert(`${incomeType.charAt(0).toUpperCase() + incomeType.slice(1)} income added successfully!`);
-            incomeForm.reset();
-        });
+incomeForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const amount = parseFloat(incomeInput.value);
+    if (!isNaN(amount) && amount > 0) {
+        income = amount;
+        totalIncomeElement.textContent = `$${income.toFixed(2)}`;
+        updateSummary();
     }
-
-    
-    formHandlers.forEach(({ formId, storageKey }) => {
-        const form = document.getElementById(formId);
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const type = form.querySelector('select').value;
-            const amount = parseFloat(form.querySelector('input').value);
-
-            if (!amount || isNaN(amount)) {
-                alert("Please enter a valid expense amount.");
-                return;
-            }
-
-            const expensesData = JSON.parse(localStorage.getItem(storageKey)) || [];
-            expensesData.push({ type, amount });
-            localStorage.setItem(storageKey, JSON.stringify(expensesData));
-
-            alert(`${storageKey.charAt(0).toUpperCase() + storageKey.slice(1)} expense added successfully!`);
-            form.reset();
-        });
-    });
-
-   
-    function calculateTotalIncomeExpenses() {
-        
-        let totalIncome = 0;
-        const incomeData = JSON.parse(localStorage.getItem('income')) || [];
-        incomeData.forEach(item => totalIncome += item.incomeAmount);
-
-        
-        let totalExpenses = 0;
-        const expenseCategories = ['utilities', 'entertainment', 'medical', 'family', 'others'];
-        expenseCategories.forEach(category => {
-            const expenseData = JSON.parse(localStorage.getItem(category)) || [];
-            expenseData.forEach(expense => totalExpenses += expense.amount);
-        });
-
-        const remainingBalance = totalIncome - totalExpenses;
-
-        
-        document.getElementById('total-income').textContent = `$${totalIncome.toFixed(2)}`;
-        document.getElementById('total-expenses').textContent = `$${totalExpenses.toFixed(2)}`;
-        document.getElementById('remaining-budget').textContent = `$${remainingBalance.toFixed(2)}`;
-
-        return { totalIncome, totalExpenses, remainingBalance };
-    }
-
-    calculateTotalIncomeExpenses();
+    incomeInput.value = '';
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    const resetButton = document.getElementById('reset-button');
-    resetButton.addEventListener('click', () => {
 
-        localStorage.removeItem('income');
+expenseForms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-        localStorage.removeItem('utilities');
+        const category = e.target.querySelector('select').value;
+        const amount = parseFloat(e.target.querySelector('input').value);
 
-        localStorage.removeItem('entertainment');
-
-        localStorage.removeItem('medical');
-
-        localStorage.removeItem('family');
-
-        localStorage.removeItem('others');
-
-        
-        document.getElementById('total-income').textContent = '$0.00';
-
-        document.getElementById('total-expenses').textContent = '$0.00';
-
-        document.getElementById('remaining-budget').textContent = '$0.00';
-
-        
-        const forms = document.querySelectorAll('form');
-        forms.forEach(form => form.reset());
-
-        
-        alert('All data has been reset!');
-    });
-
-    
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const expenseForm = document.getElementById('utilities-form'); 
-    expenseForm.addEventListener('submit', function (event) {
-        const amountInput = expenseForm.querySelector('input[type="number"]');
-        const amountValue = parseFloat(amountInput.value);
-
-        
-        if (isNaN(amountValue) || amountValue <= 0) {
-            event.preventDefault();
-            alert('Please enter a valid expense amount.'); 
-            amountInput.focus(); 
+        if (!isNaN(amount) && amount > 0) {
+            expenses.push({ category, amount });
+            displayExpenses(); 
+            updateSummary(); 
         }
+
+        
+        e.target.querySelector('input').value = '';
     });
 });
 
 
+resetButton.addEventListener('click', () => {
+    expenses = [];
+    income = 0;
+    totalIncomeElement.textContent = '$0.00';
+    totalExpensesElement.textContent = '$0.00';
+    remainingBudgetElement.textContent = '$0.00';
+    displayExpenses(); 
+});
 
+displayExpenses();
+updateSummary();
