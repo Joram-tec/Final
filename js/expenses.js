@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const formHandlers = [
         { formId: 'utilities-form', storageKey: 'utilities' },
+
         { formId: 'entertainment-form', storageKey: 'entertainment' },
+
         { formId: 'medical-form', storageKey: 'medical' },
+
         { formId: 'family-form', storageKey: 'family' },
+        
         { formId: 'other-expenses-form', storageKey: 'others' }
     ];
 
@@ -143,5 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const expenseForm = document.getElementById('utilities-form'); 
+    expenseForm.addEventListener('submit', function (event) {
+        const amountInput = expenseForm.querySelector('input[type="number"]');
+        const amountValue = parseFloat(amountInput.value);
+
+        
+        if (isNaN(amountValue) || amountValue <= 0) {
+            event.preventDefault();
+            alert('Please enter a valid expense amount.'); 
+            amountInput.focus(); 
+        }
+    });
+});
+
 
 
