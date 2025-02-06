@@ -14,7 +14,7 @@ My site is live at :
 
 joram-tec.github.io/Final/
 
-Follow the following steps to reach my site:
+## Follow the following steps to reach my site:
 
 1.Clone the repository to your local machine.
 
