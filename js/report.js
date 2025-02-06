@@ -20,7 +20,7 @@ function displayExpenseDetails() {
 }
 
 
-function updateReport() {
+function updateReport(){
     const totalExpenses = calculateTotalExpenses();
     const surplusDeficit = income - totalExpenses;
 
